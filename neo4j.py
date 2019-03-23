@@ -169,3 +169,8 @@ class NeoDB():
         ORDER BY weight DESC
         RETURN name, org_name, common_skills, weight""".format(username, company_name, company_name)
         print( pd.DataFrame(self.graph.run(query_string).data()).to_string() )
+
+    def neo_import(self):
+        neo_path = input ("Enter the path to neo4j folder.\n")
+        print ("For example on this machine, the path is:")
+        print("")

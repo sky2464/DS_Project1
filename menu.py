@@ -22,8 +22,9 @@ class Menu():
         print("* 4 - Query MongoDB               **")
         print("* 5 - Query Neo4j                 **")
         print("* 6 - Query History               **")
-        print("* 7 - Import CSV file to DBs      **")
-        print("* 8 - Quit the APP                **")
+        print("* 7 - Import CSV file to MongoDB  **")
+        print("* 8 - Import CSV file to Neo4j    **")
+        print("* 9 - Quit the APP                **")
         print("************************************")
         print("NOTE: Please run Option 1 before any others")
 
@@ -59,7 +60,13 @@ class Menu():
             self.mongo_db.import_content(filepath)
 
             pass
-        if(choice=="8"):
+        if(choice=="8"): #Import CSV neo4j
+            
+
+            pass
+
+
+        if(choice=="9"):
             quit()
 
     def get_user_list(self):

@@ -43,11 +43,13 @@ class Menu():
             input("Press Enter to continue...")
             pass
         if(choice=="4"):
+            
             query = input("Write Query for MongoDB: ")
             self.query_history.append(query)
             pass
         if(choice=="5"):
             query = input("Write Query for Neo4j: ")
+            print("To delete all nodes: MATCH (n:Person) OPTIONAL MATCH (n)-[r]-() DELETE r,n")
             self.query_history.append(query)
             pass
         if(choice=="6"):
@@ -61,7 +63,36 @@ class Menu():
 
             pass
         if(choice=="8"): #Import CSV neo4j
-            
+            print ("This is critical, so you need to contact the DB admin\n")
+            print ("***** Instructions for Neo4J DB Admin******\n")
+            print("Please Copy all of  the CSV files into the neo4j import folder \n ")
+            print ("Next, copy the path to csv file, and be sure if it is relation or node.\n")
+            print ("For example on ubuntu machines, the path is:\n")
+            print("/var/lib/neo4j/import/*.csv\n")
+            print ("login to the neo4j managment console, and execute the following cypher query\n")
+            print ("""LOAD CSV WITH HEADERS FROM 'file:///project1_sample/user.csv' AS line
+                    MERGE (:user { User_id: line.User_id, name: line.`First name`, lastname: line.`Last name`}\n
+                       OR \n
+                    LOAD CSV WITH HEADERS FROM 'file:///project1_sample/distance.csv' AS line \n
+                    CREATE (:distance { Organization1: line.`Organization 1`, Organization2: line.`Organization 2`,\n
+                    Distance: line.Distance}) \n
+                        OR \n
+                    LOAD CSV WITH HEADERS FROM 'file:///project1_sample/interest.csv' AS line MERGE \n
+                    (:interest { User_id: line.User_id, Interest: line.`Interest`, InterestLevel: line.`Interest level`}) \n
+                        OR \n
+                    LOAD CSV WITH HEADERS FROM 'file:///project1_sample/organization.csv' AS line MERGE (:organization \n
+                    { User_id: line.User_id, organization: line.`organization`, organization_type: line.`organization type`}) \n
+                        OR \n    
+                    LOAD CSV WITH HEADERS FROM 'file:///project1_sample/project.csv' \n
+                    AS line MERGE (:project { User_id: line.User_id, Project: line.Project})
+
+                    LOAD CSV WITH HEADERS FROM 'file:///project1_sample/skill.csv'\n
+                    AS line MERGE (:skill { User_Id: line.User_Id, Skill: line.`Skill `,Skill_level: line.`Skill level`})\n
+                      OR \n
+                          
+                        """)
+
+           
 
             pass
 

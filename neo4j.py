@@ -1,5 +1,6 @@
 from py2neo import Graph, Node, Relationship
 import pandas as pd
+import csv
 
 class NeoDB():
 
@@ -170,7 +171,25 @@ class NeoDB():
         RETURN name, org_name, common_skills, weight""".format(username, company_name, company_name)
         print( pd.DataFrame(self.graph.run(query_string).data()).to_string() )
 
-    def neo_import(self):
-        neo_path = input ("Enter the path to neo4j folder.\n")
-        print ("For example on this machine, the path is:")
-        print("")
+    """ def neo_import(self, path):
+            LOAD CSV WITH HEADERS FROM + path + AS line
+            WITH line
+            WHERE line.name IS NOT NULL
+            MERGE (person:Person{Name:line.Name})
+            MERGE (name:name{Name:line.name})
+            MERGE (person) -[:belongs_to]-> (name)
+            graph.run(query) """
+
+    """ def read_CSV_neo(self, path):
+            with open(path) as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    organization = row['organization']
+                    user = row['user']
+                    interest = row['interest']
+                    distance = row['distance']
+                    skill = row['skill']
+                    graph.run("MERGE (p:user{name:{name}}) 
+                    MERGE (o:organization{name:{organization}} )
+                    CREATE (p)-[:IS_CONNECTED{type:{relationship}}]->(o)",
+                    name=user, organization=organization , relationship = skill ) """
